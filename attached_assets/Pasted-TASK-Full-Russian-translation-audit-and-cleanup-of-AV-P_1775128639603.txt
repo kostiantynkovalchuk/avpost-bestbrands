@@ -1,0 +1,106 @@
+TASK: Full Russian translation audit and cleanup of AV Post bilingual HTML newspaper
+Context
+This is a single-file bilingual HTML newspaper (index.html) for Best Brands (ТОВ «БЕСТ БРЕНДС»). It has a Ukrainian/Russian language toggle system. Ukrainian is the default. Russian is activated by clicking «РУС» button in the masthead.
+The bilingual system works like this:
+html<span class="t" data-ua="Ukrainian text" data-ru="Russian text">Ukrainian text</span>
+```
+JavaScript swaps `.textContent` to `data-ru` when RUS is active.
+
+---
+
+## Problems to fix
+
+### 1. HTML artifacts appearing as visible text in Russian mode
+Some spans have broken `data-ua` attributes — the Ukrainian text leaked INTO the attribute value, causing raw HTML to appear on screen. Pattern to find:
+```
+data-ua="some text <span class="t" data-ua="..."
+Any data-ua or data-ru attribute that contains <span, >, <, or another data- inside it is broken. Fix by rebuilding as a single clean span.
+2. Missing Russian translations
+Find every <span class="t" where data-ru is empty, identical to data-ua, or missing. Also find all Ukrainian text nodes NOT wrapped in span.t at all — these never switch to Russian.
+Detection script:
+javascript// Run in browser console to find untranslated strings
+document.querySelectorAll('span.t').forEach(el => {
+  if (!el.dataset.ru || el.dataset.ru === el.dataset.ua) {
+    console.log('MISSING RU:', el.dataset.ua?.substring(0, 60))
+  }
+})
+Also check for raw Ukrainian text nodes (Cyrillic text not inside any span.t):
+javascriptfunction findUntranslated(node) {
+  if (node.nodeType === 3) {
+    const text = node.textContent.trim()
+    if (text.length > 3 && /[а-яіїєґ]/i.test(text)) {
+      console.log('UNTAGGED:', text.substring(0, 80))
+    }
+  }
+  node.childNodes.forEach(findUntranslated)
+}
+findUntranslated(document.body)
+3. Sections to audit for completeness
+Go through every section and verify Russian translation exists and is correct:
+
+Masthead + Nav
+Soju article (2 parts)
+Гоц interview (13 Q&A pairs)
+Frizzante article
+Бондаренко interview
+Records section
+Херсон article
+Воротникова interview (14 Q&A pairs)
+Auto article
+MAYA section
+Horoscope (12 zodiac cards)
+Office spring section
+Quiz (5 questions + 3 results)
+Social media section
+Footer
+
+
+Translation requirements
+Tone: Corporate Ukrainian→Russian. Formal but warm. Same register as original.
+Do NOT translate:
+
+Brand names: Green Day, Villa UA, Funju Soju, Luigi Antonio, Kristi Valley, Pedro Martinez, MAYA, AV Post
+Person names: Іван Гоц → Иван Гоц (transcribe, don't translate)
+Product names: Frizzante, Soджу, Adjari, Klinkov
+Numbers, dates, percentages
+Latin text: PDCA, SKU, EU, AI
+Meme image text (baked into images)
+
+Key term translations:
+
+торговий представник → торговый представитель
+дистрибуція → дистрибуция
+виробництво → производство
+філія → филиал
+план → план
+перевиконання → перевыполнение
+співробітник → сотрудник
+
+
+Expected output
+After fixes:
+
+Zero HTML artifacts visible in Russian mode
+Zero untranslated Ukrainian strings in Russian mode
+All span.t have valid data-ua and data-ru (no HTML inside attributes)
+Language switcher works on desktop, tablet, mobile
+localStorage saves language preference
+
+Test procedure:
+
+Open in browser
+Click РУС
+Scroll entire page — every text should be in Russian
+Click УКР — everything returns to Ukrainian
+Refresh page — language preference persists
+
+
+Technical notes
+
+Language switcher buttons: id="btn-ua" and id="btn-ru"
+JS function: setLang('ru') / setLang('ua')
+All translatable spans have class="t"
+Mobile: switcher is position: fixed; top: 12px; right: 12px
+Desktop/tablet: switcher is position: static (inline in masthead)
+localStorage key: avpost-lang
+File is ~11MB due to base64 images — do not remove or replace images
