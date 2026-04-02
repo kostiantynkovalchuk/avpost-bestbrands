@@ -36,3 +36,11 @@ externalPort = 80
 [deployment]
 deploymentTarget = "static"
 publicDir = "."
+
+[userenv]
+
+[userenv.shared]
+GIT_AUTHOR_EMAIL = "176706484+kostiantynkovalchuk@users.noreply.github.com"
+GIT_AUTHOR_NAME = "kostiantynkovalchuk"
+GIT_COMMITTER_EMAIL = "176706484+kostiantynkovalchuk@users.noreply.github.com"
+GIT_COMMITTER_NAME = "kostiantynkovalchuk"
