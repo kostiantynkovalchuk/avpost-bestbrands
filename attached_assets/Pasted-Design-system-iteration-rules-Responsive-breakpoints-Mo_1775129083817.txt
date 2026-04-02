@@ -1,0 +1,85 @@
+Design system & iteration rules
+Responsive breakpoints
+Mobile:  < 768px   — 16px padding, single column
+Tablet:  768–1023px — 32px padding
+Desktop: ≥ 1024px  — 56px padding, max-width: 1100px
+For every change, test all three breakpoints
+When adding photos, text, or layout elements, implement and verify at all three sizes:
+Mobile first:
+
+Single column, full-width images
+object-fit: cover with appropriate object-position
+No horizontal overflow
+Touch-friendly tap targets (min 44px)
+Person photos: 130px circles
+
+Tablet (768–1023px):
+
+32px horizontal padding
+2-col grids where appropriate (horoscope, records)
+Person photos: 120×150px rectangles
+
+Desktop (≥1024px):
+
+56px horizontal padding
+2-col article body (column-count: 2)
+3-col records grid
+4-col horoscope grid
+Person photos: 180×220px rectangles with box-shadow
+
+
+Adding photos — standard pattern
+When inserting a new photo, always use this structure:
+html<figure class="photo-card">
+  <img src="..." alt="Description" style="max-height:400px;object-fit:cover;object-position:center center;">
+  <figcaption>Caption text</figcaption>
+</figure>
+For float-left with text wrap:
+html<figure style="float:left;width:38%;max-width:280px;margin:4px 24px 8px 0;padding:0;">
+  <img src="..." alt="..." style="width:100%;display:block;object-fit:cover;border-radius:4px;">
+  <figcaption>Caption</figcaption>
+</figure>
+<div style="overflow:hidden;">
+  <!-- text wraps here -->
+</div>
+```
+
+---
+
+### Key CSS classes reference
+```
+.article          — content wrapper, padding handled by MQ
+.article-body     — 2-col on desktop, 1-col on mobile
+.photo-card       — figure with caption
+.full-bleed       — edge-to-edge image
+.record-col       — record card column (overflow:hidden)
+.car-photos-pair  — 2-col auto article photos
+.office-two-col   — 2-col Valentine/March8 layout
+.bilshe-two-col   — Kutsaya photo-left text-right
+.meme-section     — column-count:2 masonry on desktop
+.horoscope-grid   — 4-col desktop, 2-col tablet/mobile
+.pull-quote       — blockquote with navy left border
+.interview-q      — question styling
+.interview-a      — answer styling
+.person-header    — photo + name + title row
+.stats-row        — metrics row below person header
+.lang-switcher    — УКР/РУС toggle buttons
+
+Bilingual system — always maintain
+Every new text element must be wrapped:
+html<span class="t" data-ua="Ukrainian" data-ru="Russian">Ukrainian</span>
+Never add raw Ukrainian text without a corresponding Russian translation in data-ru.
+
+Quality checklist before committing
+Before every git push, verify:
+
+ No horizontal scroll on mobile (375px width)
+ Images don't overflow their containers
+ Text is readable at all sizes (min 14px mobile)
+ Language toggle switches ALL text (no Ukrainian left in RUS mode)
+ No raw HTML visible on screen in either language
+ Photos have alt text
+ No broken base64 strings (images display correctly)
+ Footer visible and correct in both languages
+
+
