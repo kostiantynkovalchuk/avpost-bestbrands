@@ -1,0 +1,57 @@
+Prompt 1 — Photo in 8 March article
+Add a photo to the 8 March office event section
+In <!-- SECTION 11: OFFICE EVENTS -->, find the 8 March / Lady in Pink subsection. The user will drag-and-drop a photo file directly into the Replit file tree — it will appear in /attached_assets/ or workspace root.
+Once the image file appears:
+
+Convert it to base64:
+
+pythonimport base64
+with open('FILENAME.jpg', 'rb') as f:
+    data = base64.b64encode(f.read()).decode()
+src = f"data:image/jpeg;base64,{data}"
+
+Find a natural insertion point in the 8 March subsection — after the first descriptive paragraph, before the closing quote. Use your design judgment to place it where it best breaks the text visually.
+Insert as full-bleed:
+
+html<img src="[base64]" class="full-bleed" alt="8 березня — офіс у рожевих тонах">
+Design requirements:
+
+Match the visual style of existing office event photos in this section
+Full-bleed on mobile, natural proportions on desktop
+No caption needed unless it adds editorial value
+Maintain the warm, celebratory tone of the section
+
+Commit and push. Then run:
+bashgit commit --amend --reset-author --no-edit
+git push --force
+
+Prompt 2 — Photo + updated mentions in Auto article
+Add Павло Дідусь photo and update auto article text
+In <!-- SECTION 9: AUTO ARTICLE --> (or whichever section contains the corporate cars article about Ткач and Демченко):
+The user will drag-and-drop a photo. Once it appears in the file tree:
+
+Convert to base64 using Python as above.
+Insert the photo with a styled caption card matching the existing person cards in this article:
+
+html<div style="margin:16px 0;">
+  <img src="[base64]" class="full-bleed" alt="Павло Дідусь" style="max-height:400px;object-fit:cover;object-position:center top;">
+  <div style="font-family:Arial,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#888;margin-top:8px;text-align:center;">
+    <span class="t" 
+      data-ua="Павло Дідусь — Директор філії м. Запоріжжя" 
+      data-ru="Павел Дидусь — Директор филиала г. Запорожье">
+      Павло Дідусь — Директор філії м. Запоріжжя
+    </span>
+  </div>
+</div>
+
+Find where Ткач and Демченко are listed in the article body and add Павло Дідусь to the same list. The updated list should read:
+
+html<span class="t" data-ua="🚗 Олександра Ткач — Територіальний менеджер по Закарпаттю" data-ru="🚗 Александра Ткач — Территориальный менеджер по Закарпатью">🚗 Олександра Ткач — Територіальний менеджер по Закарпаттю</span><br>
+<span class="t" data-ua="🚗 Костянтин Демченко — Національний менеджер" data-ru="🚗 Константин Демченко — Национальный менеджер">🚗 Костянтин Демченко — Національний менеджер</span><br>
+<span class="t" data-ua="🚗 Павло Дідусь — Директор філії м. Запоріжжя" data-ru="🚗 Павел Дидусь — Директор филиала г. Запорожье">🚗 Павло Дідусь — Директор філії м. Запоріжжя</span>
+Design requirements:
+
+Photo placement should feel natural and editorial — use your design judgment
+Caption style must match Ткач and Демченко captions already in the article
+Both languages must be tagged with span.t for the bilingual system
+Do not change the pull quote or any other element in this section
