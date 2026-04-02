@@ -16,6 +16,15 @@ A single-page digital corporate newspaper/newsletter for "Best Brands". It is a 
 └── replit.md        # This file
 ```
 
+## Git Configuration
+
+Run these at the start of every session before any commit:
+
+```
+git config --global user.email "176706484+kostiantynkovalchuk@users.noreply.github.com"
+git config --global user.name "kostiantynkovalchuk"
+```
+
 ## Running the App
 
 The workflow starts a Python HTTP server:
