@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "w5IYaVUFRr36mTVEAr5AQ"
+uri = "file://index.html"
+type = "text"
+title = "Final HTML file"
+description = "The latest completed index.html for the project."
