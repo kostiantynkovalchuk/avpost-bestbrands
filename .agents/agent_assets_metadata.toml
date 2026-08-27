@@ -7,3 +7,10 @@ uri = "file://index.html"
 type = "text"
 title = "Final HTML file"
 description = "The latest completed index.html for the project."
+
+[[outputs]]
+id = "jgy2D28kRW3ulo4q7gYMZ"
+uri = "file://final-newspaper.html"
+type = "text"
+title = "Final newspaper HTML"
+description = "Standalone HTML file with all embedded images, ready to download and upload to Claude."
