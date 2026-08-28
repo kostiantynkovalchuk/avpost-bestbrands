@@ -1,0 +1,47 @@
+issue-2/index.html, ТОЛЬКО десктоп (@media min-width:1024px). Мобильные inline-стили
+не менять — все правки через CSS-блок в конце <style> вида:
+@media (min-width:1024px) {
+  img[alt="..."] { max-height:...px !important; object-position:... !important; }
+}
+
+1. GREENDAY hero (alt="GREENDAY APPLE"): max-height:640px.
+2. Setter (alt="Setter Royal Dry та Setter Royal Orange..."): фото не заполняет
+   контейнер по ширине (стоит object-fit:contain с серым фоном). На десктопе:
+   width:100%; object-fit:cover; max-height:680px; object-position:center center;
+   background:none.
+3. Бріджертони hero (alt="Бал у стилі «Бріджертонів»"): max-height:680px;
+   object-position:center 25%.
+4. Пирамида (alt="Бал «Бріджертонів» — Frizzante Villa UA"): max-height:720px;
+   object-position:center 60% — пирамида и бутылка целиком.
+5. Чуйка hero (alt="Детектор дронів «Чуйка»"): max-height:560px.
+6. Чуйка, layout: перенеси <div class="pull-quote"> («Закупівля детекторів...»)
+   ВНУТРЬ первой .office-col — сразу после текстового div Истории 1 (это правка
+   разметки, единственная; на мобиле цитата встанет между историями — допустимо).
+7. Кайдзен hero (alt="Тренінг «Дистриб'юція у стилі Кайдзен»"): max-height:640px;
+   object-position:center 30% — ноги тренера в кадре, проверь скриншотом.
+8. Мотивация (alt="Командний захід — дегустація"): max-height:640px. Подпись
+   figcaption заменить: data-ua="Командний захід переможців — картинг та драйв"
+   data-ru="Командное мероприятие победителей — картинг и драйв" (на фото картинг-
+   трасса, дегустация — неверная подпись).
+9. Павлин hero (alt="Живий куточок на території заводу"): max-height:660px;
+   object-position:center 5% — голова с хохолком целиком.
+
+10. «Як стати легендою офісу», десктоп-раскладка. НЕ masonry — связка
+   «пункт → мем» рвётся, а подписи внутри мемов при выравнивании обрежутся.
+   Вместо этого зигзаг 2-колонки:
+   @media (min-width:1024px) каждую пару обернуть... разметку НЕ менять, сделать
+   через CSS: каждой паре (.results-list + следующий .photo-card) задай через
+   nth-of-type не получится надёжно — поэтому одна минимальная правка разметки:
+   оберни каждую пару в <div class="legend-row"> (7 штук). CSS:
+   .legend-row { display:contents; }  /* мобила: как раньше, поток */
+   @media (min-width:1024px) {
+     .legend-row { display:grid; grid-template-columns:1fr 1fr; gap:32px;
+       align-items:center; margin-bottom:40px; }
+     .legend-row:nth-child(even) .results-list { order:2; }
+     .legend-row .photo-card img { max-height:520px; width:auto; max-width:100%;
+       margin:0 auto; }
+   }
+   Итог: текст слева / мем справа, чередование зеркалится, мемы разных пропорций
+   выровнены по центру ячейки и не растянуты.
+
+11. commit + amend --reset-author + push. Скриншоты 1280px всех десяти мест.

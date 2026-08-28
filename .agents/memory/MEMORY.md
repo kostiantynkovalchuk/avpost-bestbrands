@@ -1,0 +1,1 @@
+- [Large inline HTML editing](large-inline-html-editing.md) — Issue HTML with embedded images exceeds patch-tool size limits; use guarded exact transforms that preserve old data URIs.
