@@ -1,0 +1,38 @@
+issue-2/index.html. Три группы правок: исходники, точечные inline-стили, CSS stats-row.
+
+A. ИСХОДНИКИ (Pillow, затем replace data URI только затронутых img):
+1. Зоопарк: hero секции «Живий куточок» заменить на фото павлина (сейчас оно в карусели,
+   позиция 5). Павлина из карусели убрать, вместо него в карусель вернуть текущий hero
+   (Зоопарк/4.png). В карусели остаются 6 уникальных, hero — павлин.
+2. Кайдзен: training_dp_1 и training_dp_2 — это скриншоты видео с экрана ПК (виден
+   плеер и панель Windows). Обрезать до содержимого кадра: убрать чёрные поля,
+   заголовок плеера и таскбар справа/снизу. Проверь training_sv — если тоже скриншот,
+   обрезать так же.
+
+B. INLINE-СТИЛИ (только у перечисленных img, остальное не трогать):
+3. El Terrole и Adjari Coffee (обе figure в «Дві новинки»): заменить style на
+   "width:100%;height:auto;display:block;" — промо-банеры показываем целиком, без crop.
+4. Портреты героев: bezzubenko, dilovyi, manko — object-position: center 65%
+   (сейчас слишком много воздуха над головой). riabtsun — кадр слишком крупный:
+   замерь в DevTools высоту .photo-card img на 390px; если фото сильно зумится
+   через cover, для этого img поставь object-fit:contain с background:#f2f2f2 и
+   пришли скриншот — сравним.
+5. bridgerton_2 (пирамида бокалов): object-position: center 100% — внизу кадра
+   бутылка, она должна попасть в кадр.
+
+C. CSS .stats-row (в CSS выпуска №2, все брейкпоинты):
+Заменить стили .stats-row / .stats-row-item на:
+  .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    border-top:2px solid #111; border-bottom:1px solid #ddd; margin:0 16px 10px; }
+  .stats-row-item { padding:14px 10px 12px; text-align:center;
+    border-left:1px solid #ddd; }
+  .stats-row-item:first-child { border-left:none; }
+  .stats-row-item strong { display:block; font-family:Georgia,serif; font-size:26px;
+    line-height:1; color:#1B2F6E; margin-bottom:6px; }
+  .stats-row-item span { font-family:Arial,sans-serif; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.5px; color:#777; line-height:1.45;
+    display:block; }
+У Надуєва 3 показателя → 3 колонки, у Короля 4 → 2×2 на мобиле, 4 в ряд на десктопе,
+у Лозовой 3. Проверь все четыре интервью на 390/768/1100, скриншоты в отчёт.
+
+D. commit + amend --reset-author + push. В отчёте: список заменённых data URI и стилей.
