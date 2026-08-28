@@ -1051,6 +1051,90 @@
       margin: 0 auto;
     }
   }
+
+
+  /* Desktop polish: final structural overrides */
+  @media (min-width: 1024px) {
+    .legend-row .results-list li {
+      display: grid !important;
+      grid-template-columns: 24px minmax(0, 1fr) !important;
+      column-gap: 12px !important;
+      align-items: start !important;
+    }
+    .legend-row .results-list li::before {
+      grid-column: 1 !important;
+      grid-row: 1 / span 2 !important;
+    }
+    .legend-row .results-list li > strong {
+      display: block !important;
+      grid-column: 2 !important;
+      grid-row: 1 !important;
+    }
+    .legend-row .results-list li > span {
+      display: block !important;
+      grid-column: 2 !important;
+      grid-row: 2 !important;
+    }
+
+    img.full-bleed[alt="Бал у стилі «Бріджертонів»"] {
+      width: 100% !important;
+      height: 560px !important;
+      min-height: 560px !important;
+      max-height: 560px !important;
+      object-fit: cover !important;
+      object-position: center 38% !important;
+    }
+    figure.photo-card > img[alt="Бал «Бріджертонів» — Frizzante Villa UA"] {
+      width: 100% !important;
+      height: 560px !important;
+      min-height: 560px !important;
+      max-height: 560px !important;
+      object-fit: cover !important;
+      object-position: center 45% !important;
+    }
+    img.full-bleed[alt="Живий куточок на території заводу"] {
+      width: 100% !important;
+      height: 560px !important;
+      min-height: 560px !important;
+      max-height: 560px !important;
+      object-fit: cover !important;
+      object-position: center 15% !important;
+    }
+
+    .record-col figure.photo-card > img[alt="Віктор Беззубенко"],
+    .record-col figure.photo-card > img[alt="Сергій Рябцун"] {
+      width: 100% !important;
+      height: 480px !important;
+      min-height: 480px !important;
+      max-height: 480px !important;
+      aspect-ratio: auto !important;
+      object-fit: cover !important;
+    }
+    .record-col figure.photo-card > img[alt="Сергій Рябцун"] {
+      object-position: center top !important;
+      transform: none !important;
+    }
+
+    figure.photo-card > img[alt="Командний захід — дегустація"] {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      margin: 0 !important;
+    }
+
+    .stats-row-item strong {
+      display: inline-block !important;
+      white-space: nowrap !important;
+    }
+    .stats-row-item strong > span {
+      display: inline !important;
+      white-space: nowrap !important;
+    }
+  }
 </style>
 </head>
 <body>
