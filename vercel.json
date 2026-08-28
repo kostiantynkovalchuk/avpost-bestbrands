@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/issue-2/",
+      "statusCode": 307
+    }
+  ]
+}
